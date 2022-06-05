@@ -1,0 +1,18 @@
+---
+- name: установка zabbix-agent
+  hosts: server2, server1
+  tasks:
+    - name: установка
+      apt:
+        name: zabbix-agent
+        state: present
+        update-cache: true
+    - name: настройки zabbix-agent .conf
+      copy:
+        src: /home/vova/ansible/conf_zabbix/zabbix_agentd.conf
+        dest: /etc/zabbix/zabbix_agentd.conf
+    - name: запуск
+      service:
+        name: zabbix-agent
+        state: restarted
+  become: true

@@ -1,0 +1,13 @@
+---
+- name: установка апаче сервер
+  hosts: server2
+  tasks:
+    - name: устновка
+      apt:
+        name:
+          - apache2
+        state: latest
+        update-cache: true
+      notify:
+        - apache2
+  become: true
