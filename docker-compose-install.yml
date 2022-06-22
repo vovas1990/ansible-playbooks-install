@@ -1,0 +1,29 @@
+# УСТАНАВЛИВАЕМ DOCKER-COMPOSE
+
+    - name: установка DOCKER-COMPOSE
+      block:
+
+        - name: создание папки для docker-compose
+          file:
+            path=/usr/local/lib/docker/cli-plugins
+            state=directory
+
+        - name: установка docker-compose
+          get_url:
+            url: "https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-linux-x86_64 "
+            dest: /usr/local/lib/docker/cli-plugins  # место установки
+            mode: 0755 # режим файла тоже самое что и sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+      become: true
+
+    - name: завершение установки
+      block:
+        - name: добавление пользователя в группу docker
+          user:
+            name: "{{ansible_user}}"
+            groups: docker
+            append: true
+          become: true
+
+        - name: перезагрузка сервера
+          reboot:
+      become: true
