@@ -20,7 +20,6 @@
     - name: обновление 
       apt:
         update-cache: true
-        upgrade: true
 
     - name: скачиваем репозиторий nginx
       apt_repository:
