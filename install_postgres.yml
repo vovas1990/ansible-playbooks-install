@@ -1,0 +1,31 @@
+---
+- name: install postgres
+  hosts: sql
+  tasks:
+    - name: установка СУБД postgres
+      block:
+        - name: создание конфигурации
+          apt: 
+            name:
+              - wget
+              - ca-certificates
+        - name: Set up Postgres 14 repo
+          shell: |
+            echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+            wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+          args:
+            warn: no
+
+        - name: обновление пакетов
+          apt:
+            update-cache: true
+
+        - name: Pause for 40 sec
+          ansible.builtin.pause:
+            seconds: 40
+        
+        - name: установка посгрес
+          apt:
+            name:
+              - postgresql
+              - postgresql-contrib
