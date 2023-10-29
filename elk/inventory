@@ -1,0 +1,30 @@
+[swarm]
+#192.168.100.100 ansible_user=vova
+192.168.100.101 ansible_user=vova
+192.168.100.102 ansible_user=vova
+#192.168.100.103 ansible_user=vova
+#192.168.100.104 ansible_user=vova
+#192.168.100.105 ansible_user=vova
+#192.168.100.106 ansible_user=vova
+[n_kube]
+192.168.100.102 ansible_user=vova
+#192.168.100.103 ansible_user=vova
+[m_kube]
+192.168.100.101 ansible_user=vova
+[sql]
+192.168.100.103
+[kafka]
+192.168.100.111 ansible_user=vova
+192.168.100.112 ansible_user=vova
+192.168.100.113 ansible_user=vova
+[elk]
+192.168.100.111 ansible_user=vova
+192.168.100.112 ansible_user=vova
+192.168.100.113 ansible_user=vova
+
+[elk1]
+192.168.100.111 ansible_user=vova
+[elk2]
+192.168.100.112 ansible_user=vova
+[elk3]
+192.168.100.113 ansible_user=vova

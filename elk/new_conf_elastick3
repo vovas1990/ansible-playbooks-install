@@ -1,0 +1,9 @@
+---
+- name: install elk
+  hosts: elk3
+  tasks:
+    - name: If follow=yes, /path/to/file will be overwritten by contents of foo.conf
+      ansible.builtin.copy:
+        src: /home/vova/project/git_project/ansible-playbooks-install/elk/prop.elastic-node3
+        dest: /etc/elasticsearch/elasticsearch.yml
+        follow: yes
