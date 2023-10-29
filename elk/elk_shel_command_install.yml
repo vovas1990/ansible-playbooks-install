@@ -38,9 +38,78 @@
             apt-get -y update
             apt-get install elasticsearch 
           args:
-            warn: no
+            warn: no 
             
         - name: Pause for 50 sec
           ansible.builtin.pause:
             seconds: 50
+
       become: true
+
+- name: elk1 изменение файла elasticsearch.yml
+  hosts: elk1
+  tasks:
+    - name: If follow=yes, /path/to/file will be overwritten by contents of foo.conf
+      ansible.builtin.copy:
+        src: /home/vova/project/git_project/ansible-playbooks-install/elk/prop.elastic-node1
+        dest: /etc/elasticsearch/elasticsearch.yml
+        follow: yes
+  become: true
+
+
+- name: elk2 изменение файла elasticsearch.yml
+  hosts: elk2
+  tasks:
+    - name: If follow=yes, /path/to/file will be overwritten by contents of foo.conf
+      ansible.builtin.copy:
+        src: /home/vova/project/git_project/ansible-playbooks-install/elk/prop.elastic-node2
+        dest: /etc/elasticsearch/elasticsearch.yml
+        follow: yes
+  become: true      
+
+- name: elk3 изменение файла elasticsearch.yml
+  hosts: elk3
+  tasks:
+    - name: If follow=yes, /path/to/file will be overwritten by contents of foo.conf
+      ansible.builtin.copy:
+        src: /home/vova/project/git_project/ansible-playbooks-install/elk/prop.elastic-node3
+        dest: /etc/elasticsearch/elasticsearch.yml
+        follow: yes
+  become: true      
+
+- name: elk1 запуск elk1
+  hosts: elk1
+  tasks:
+    - name: запуск кластера elk1
+      shell: |
+        sudo systemctl start elasticsearch.service 
+      args:
+        warn: no
+
+    - name: Pause for 50 sec
+      ansible.builtin.pause:
+        seconds: 50
+    - name: проверка кластера
+      shell: |
+        curl -X GET "http://localhost:9200/_cluster/health?pretty"
+      args:
+        warn: no
+  become: true
+
+- name: elk2
+  hosts: elk2
+  tasks:
+    - name: elk2
+      shell: |
+        sudo systemctl start elasticsearch.service
+      args:
+        warn: no
+
+- name: elk3
+  hosts: elk3
+  tasks:
+    - name:  elk3
+      shell: |
+        sudo systemctl start elasticsearch.service
+      args:
+        warn: no

@@ -12,8 +12,8 @@
 #
 # ---------------------------------- Cluster -----------------------------------
 
-cluster.name: es_cluster                                             # Имя кластера
-cluster.initial_master_nodes: ["kafak1","kafak2","kafak3"]  # Начальный набор мастер узлов
+cluster.name: elk                                             # Имя кластера
+cluster.initial_master_nodes: ["kafak1"]  # Начальный набор мастер узлов
 #
 #
 # Use a descriptive name for your cluster:
@@ -75,7 +75,8 @@ http.port: 9200
 #
 # --------------------------------- Discovery ----------------------------------
 
-discovery.seed_hosts: ["192.168.100.111", "192.168.100.112", "192.168.100.113"] # Узлы кластера
+discovery.seed_hosts: ["192.168.100.111:9300","192.168.100.112:9300","192.168.100.113:9300"]
+
 #
 # Pass an initial list of hosts to perform discovery when this node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
@@ -92,7 +93,7 @@ discovery.seed_hosts: ["192.168.100.111", "192.168.100.112", "192.168.100.113"] 
 #
 # Allow wildcard deletion of indices:
 #
-#action.destructive_requires_name: false
+action.destructive_requires_name: true
 
 #----------------------- BEGIN SECURITY AUTO CONFIGURATION -----------------------
 #
@@ -102,18 +103,18 @@ discovery.seed_hosts: ["192.168.100.111", "192.168.100.112", "192.168.100.113"] 
 # --------------------------------------------------------------------------------
 
 # Enable security features
-xpack.security.enabled: true
+xpack.security.enabled: false
 
-xpack.security.enrollment.enabled: true
+xpack.security.enrollment.enabled: false
 
 # Enable encryption for HTTP API client connections, such as Kibana, Logstash, and Agents
 xpack.security.http.ssl:
-  enabled: true
+  enabled: false
   keystore.path: certs/http.p12
 
 # Enable encryption and mutual authentication between cluster nodes
 xpack.security.transport.ssl:
-  enabled: true
+  enabled: false
   verification_mode: certificate
   keystore.path: certs/transport.p12
   truststore.path: certs/transport.p12
