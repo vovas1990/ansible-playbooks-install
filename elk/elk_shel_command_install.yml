@@ -49,7 +49,7 @@
 - name: elk1 изменение файла elasticsearch.yml
   hosts: elk1
   tasks:
-    - name: If follow=yes, /path/to/file will be overwritten by contents of foo.conf
+    - name: elk1 
       ansible.builtin.copy:
         src: /home/vova/project/git_project/ansible-playbooks-install/elk/prop.elastic-node1
         dest: /etc/elasticsearch/elasticsearch.yml
@@ -60,7 +60,7 @@
 - name: elk2 изменение файла elasticsearch.yml
   hosts: elk2
   tasks:
-    - name: If follow=yes, /path/to/file will be overwritten by contents of foo.conf
+    - name: elk2
       ansible.builtin.copy:
         src: /home/vova/project/git_project/ansible-playbooks-install/elk/prop.elastic-node2
         dest: /etc/elasticsearch/elasticsearch.yml
@@ -69,8 +69,8 @@
 
 - name: elk3 изменение файла elasticsearch.yml
   hosts: elk3
-  tasks:
-    - name: If follow=yes, /path/to/file will be overwritten by contents of foo.conf
+  tasks:    
+    - name: elk3
       ansible.builtin.copy:
         src: /home/vova/project/git_project/ansible-playbooks-install/elk/prop.elastic-node3
         dest: /etc/elasticsearch/elasticsearch.yml
