@@ -1,0 +1,28 @@
+---
+- name: kibana
+  hosts: kibana
+  tasks:
+    - name: install kibana
+      block:                 
+        - name: установка пакетов и ключей
+          shell: |
+            wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+            echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
+            dpkg --configure -a
+            apt-get -y --fix-broken install
+          args:
+            warn: no
+
+        - name: обновление пакетов
+          apt:
+            update-cache: true
+
+        - name: Pause for 40 sec
+          ansible.builtin.pause:
+            seconds: 40
+        
+        - name: установка kibana
+          apt:
+            name:
+              - kibana
+
