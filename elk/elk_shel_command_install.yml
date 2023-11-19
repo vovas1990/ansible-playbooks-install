@@ -29,20 +29,20 @@
           ansible.builtin.pause:
             seconds: 100
 
-        - name: установка эластика
+        - name: подготовка установки эластика
           shell: |
             wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
             echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
             dpkg --configure -a
             apt-get -y --fix-broken install
             apt-get -y update
-            apt-get install elasticsearch 
+            apt-get update && apt-get install elasticsearch=8.8.0
           args:
-            warn: no 
-            
-        - name: Pause for 50 sec
+            warn: no
+
+        - name: Pause for 30 sec
           ansible.builtin.pause:
-            seconds: 50
+            seconds: 30
 
       become: true
 
@@ -95,6 +95,14 @@
       args:
         warn: no
   become: true
+
+- name: Pause for 50 sec
+  hosts: elk
+  tasks:
+    - name: pause cluster      
+      ansible.builtin.pause:
+        seconds: 50
+
 
 - name: elk2
   hosts: elk2
