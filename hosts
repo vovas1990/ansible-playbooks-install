@@ -1,0 +1,20 @@
+192.168.100.102 n2kube
+192.168.100.102 n1kube
+192.168.100.101  mkube
+192.168.100.100  ansible
+127.0.0.1       localhost
+127.0.1.1       vova-VirtualBox
+192.168.100.111 kafka1
+192.168.100.112 kafka2
+192.168.100.113 kafka3
+192.168.100.105 ubuntu-5
+
+
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+

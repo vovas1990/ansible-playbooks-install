@@ -4,14 +4,31 @@
   tasks:
     - name: install kibana
       block:                 
-        - name: установка пакетов и ключей
+        - name: 1установка пакетов и ключей
           shell: |
-            wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
-            echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
-            dpkg --configure -a
-            apt-get -y --fix-broken install
+            sudo wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor  --yes -o  /usr/share/keyrings/elasticsearch-keyring.gpg
           args:
             warn: no
+
+        - name: 2установка пакетов и ключей
+          shell: |
+            sudo echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
+          args:
+            warn: no
+
+        - name: 3установка пакетов и ключей
+          shell: |
+            sudo dpkg --configure -a
+          args:
+            warn: no
+
+        - name: 4установка пакетов и ключей
+          shell: |
+            sudo apt-get -y --fix-broken install
+          args:
+            warn: no
+
+
 
         - name: обновление пакетов
           apt:
@@ -24,5 +41,5 @@
         - name: установка kibana
           apt:
             name:
-              - kibana
-
+              - kibana=8.8.0
+      become: true

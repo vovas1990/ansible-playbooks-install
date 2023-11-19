@@ -77,6 +77,18 @@
         follow: yes
   become: true      
 
+- name: elk4 изменение файла elasticsearch.yml
+  hosts: elk4
+  tasks:
+    - name: elk4
+      ansible.builtin.copy:
+        src: /home/vova/project/git_project/ansible-playbooks-install/elk/prop.elastic-node4
+        dest: /etc/elasticsearch/elasticsearch.yml
+        follow: yes
+  become: true
+
+
+
 - name: elk1 запуск elk1
   hosts: elk1
   tasks:
@@ -117,6 +129,15 @@
   hosts: elk3
   tasks:
     - name:  elk3
+      shell: |
+        sudo systemctl start elasticsearch.service
+      args:
+        warn: no
+
+- name: elk4
+  hosts: elk4
+  tasks:
+    - name:  elk4
       shell: |
         sudo systemctl start elasticsearch.service
       args:

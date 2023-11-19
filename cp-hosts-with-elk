@@ -1,0 +1,9 @@
+---
+- name: new file hosts
+  hosts: elk
+  tasks:
+    - name: If follow=yes, /path/to/file will be overwritten by contents of foo.conf
+      ansible.builtin.copy:
+        src: /home/vova/project/git_project/ansible-playbooks-install/hosts
+        dest: /etc/hosts
+        follow: yes
