@@ -1,6 +1,6 @@
 ---
 - name: установка nginx и дополнительные пакеты
-  hosts: server2
+  hosts: test
   tasks:
     - name: установка дополнительных пакетов
       apt:
